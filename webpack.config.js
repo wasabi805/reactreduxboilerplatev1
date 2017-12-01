@@ -15,18 +15,25 @@ module.exports ={
     //NOTE: Also order matters, css starts reading from right-to-left, back-to-front
     module:{
         rules:[
-            {test: /\.scss$/,
+            {
+                test: /\.scss$/,
                 use: ExtractTextPlugin.extract(
                     {
                         fallback: 'style-loader', use: ['css-loader', 'sass-loader']
                     }
                 )
+            },
+    //below is the loader for our js files.
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader',
             }
         ]
     },
 
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: `${__dirname}/dist`,
         compress: true,
         port: 3000,
         open: true
